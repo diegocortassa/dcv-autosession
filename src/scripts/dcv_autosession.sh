@@ -17,7 +17,7 @@ DCV_COLLAB_PROMPT="/usr/bin/dcv_collab_prompt.sh"
 DCV_PERM_FILE="/etc/dcv/default.perm"
 TMP_PERM_FILE="/tmp/dcv_collab.perm"
 
-[ -f "/etc/dcv/dcv_autosession.conf" ] && source "/etc/dcv/dcv_autosession.conf" 
+[ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
 # Logging functions
 log() {
