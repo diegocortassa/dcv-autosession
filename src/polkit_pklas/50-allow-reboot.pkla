@@ -1,0 +1,4 @@
+[Allow reboot for all users]
+Identity=unix-user:*
+Action=org.freedesktop.login1.reboot
+ResultAny=yes

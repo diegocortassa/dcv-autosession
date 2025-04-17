@@ -1,0 +1,4 @@
+# Allow the dcv user to launch the dcv command
+dcv ALL = NOPASSWD: /usr/bin/dcv
+# Allow the dcv user to open the collaboration request window
+dcv ALL = NOPASSWD: /usr/bin/dcv_collab_prompt.sh

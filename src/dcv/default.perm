@@ -1,0 +1,5 @@
+[permissions]
+; TPN compliant, clipboard is limited in size in /etc/dcv/dcv.conf
+%any%       deny    extensions-client extensions-server file-download file-upload printer screenshot smartcard usb webauthn-redirection
+%owner%     allow   builtin
+;%owner%    allow   audio-in audio-out clipboard-copy clipboard-paste display gamepad keyboard keyboard-sas pointer stylus touch webcam
