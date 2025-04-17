@@ -46,7 +46,6 @@ The dcv_collab_prompt.sh script was taken from https://github.com/NISP-GmbH/DCV-
 # TODO
 - If a new user first logs in with a virtual session the keyring  ~/.local/share/keyrings/login.keyring and user.keystore is not created, if google chrome is run it creates default and Default_keyring.keyring .
 - A virtual session login does not update wtmp/utmp (last, who, and w commands do not work) dcvpamhelper does not seem to call PAM for session.
-- Slow key repeat and mouse wheel from the client,
 - When using console sessions if the user logs out and disconnects the session stays open (does dcv call pam session at logout?)
 - Should we add a monitor script (cron or service) to close unused console sessions?
 - google-chrome-stable-135.0.7049.84-1.x86_64 seg faults in virtual session even with "--disable-gpu" 
