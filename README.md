@@ -31,7 +31,6 @@ When a user successfully logs in with the native or web client
 /etc/dcv/dcv_autosessions.env
 /etc/pam.d/dcv-autosession
 /etc/X11/xorg.conf.d/20-dcv-stylus.conf
-/etc/sudoers.d/90_dcv
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
 /usr/bin/dcv_unlock_kering.sh

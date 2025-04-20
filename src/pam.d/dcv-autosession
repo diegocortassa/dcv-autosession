@@ -2,12 +2,11 @@
 # Custom PAM config for DCV autosession
 # configured in /etc/dcv/dcv.conf key pam-service-name
 # Runs dcv_autosession.sh after login from dcvviewer
-# dcv_autosession.sh will run as user dcv
+# seteuid option will run dcv_autosession.sh as root user
 
-auth    required pam_exec.so /usr/bin/dcv_autosession.sh
-auth    include password-auth
-account include password-auth
+auth        include     password-auth
+auth        required    pam_exec.so seteuid /usr/bin/dcv_autosession.sh
 
-#session include password-auth
-#session     optional    pam_exec.so /tmp/pam_session.sh
+account     include     password-auth
+
 

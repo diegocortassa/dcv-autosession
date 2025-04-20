@@ -44,9 +44,6 @@ rm -f /usr/bin/dcv_autosession.sh
 rm -f src/dcv/src/dcv_autosession.env
 rm -f /usr/bin/dcv_collab_prompt.sh
 
-# Remove sudo
-rm -f  /etc/sudoers.d/90_dcv
-
 ### Remove Polkit configuration for virtual session users
 rm -f /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 rm -f /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla

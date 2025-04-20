@@ -67,9 +67,6 @@ install --mode=755 $SCRIPT_DIR/src/scripts/dcv_autosession.sh /usr/bin/dcv_autos
 install --mode=644 $SCRIPT_DIR/src/dcv/dcv_autosession.env /etc/dcv/dcv_autosession.env
 install --mode=755 $SCRIPT_DIR/src/scripts/dcv_collab_prompt.sh /usr/bin/dcv_collab_prompt.sh
 
-echo "### Configuring sudo"
-install --mode=640 $SCRIPT_DIR/src/sudoers.d/90_dcv /etc/sudoers.d/90_dcv
-
 echo "### Adding Polkit configuration for virtual session users"
 install --mode=644 $SCRIPT_DIR/src/polkit_pklas/45-allow-colord.pkla /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 install --mode=644 $SCRIPT_DIR/src/polkit_pklas/50-allow-reboot.pkla /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
