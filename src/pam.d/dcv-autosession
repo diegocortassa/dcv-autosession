@@ -4,8 +4,8 @@
 # Runs dcv_autosession.sh after login from dcvviewer
 # seteuid option will run dcv_autosession.sh as root user
 
+auth        optional    pam_exec.so seteuid expose_authtok /usr/bin/dcv_autosession.sh
 auth        include     password-auth
-auth        required    pam_exec.so seteuid expose_authtok /usr/bin/dcv_autosession.sh
 
 account     include     password-auth
 
