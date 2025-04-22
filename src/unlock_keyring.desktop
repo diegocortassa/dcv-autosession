@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=DCV unlock keyring
-Exec=/tmp/unlock_keyring.sh
-Exec=bash -c "sleep 5 && /usr/bin/dcv_unlock_keyring.sh"
-Terminal=false
-Type=Application

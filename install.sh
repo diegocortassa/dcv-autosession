@@ -75,10 +75,6 @@ echo "### Configuring xorg"
 grep -qF 'HardDPMS' /etc/X11/xorg.conf.d/10-nvidia.conf || sed -i '/Driver "nvidia"/a \ \ \ \ Option "HardDPMS" "false"' /etc/X11/xorg.conf.d/10-nvidia.conf
 cp -f $SCRIPT_DIR/src/xorg.conf.d/20-dcv-stylus.conf /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 
-echo "### Configuring keyring unlock at login for virtual session users"
-install --mode=755 $SCRIPT_DIR/src/scripts/dcv_unlock_keyring.sh /usr/bin/dcv_unlock_keyring.sh
-install --mode=644 $SCRIPT_DIR/src/unlock_keyring.desktop /etc/xdg/autostart/unlock_keyring.desktop
-
 echo "### Enabling and starting dcvserver service"
 systemctl start dcvserver.service
 systemctl enable dcvserver.service

@@ -33,8 +33,6 @@ When a user successfully logs in with the native or web client
 /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
-/usr/bin/dcv_unlock_kering.sh
-/etc/xdg/autostart/unlock_keyring.desktop
 /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
 ```
@@ -43,7 +41,6 @@ When a user successfully logs in with the native or web client
 The dcv_collab_prompt.sh script was taken from https://github.com/NISP-GmbH/DCV-Management-Linux and slightly modified
 
 # TODO
-- If a new user first logs in with a virtual session the keyring  ~/.local/share/keyrings/login.keyring and user.keystore is not created, if google chrome is run it creates default and Default_keyring.keyring .
 - A virtual session login does not update wtmp/utmp (last, who, and w commands do not work) dcvpamhelper does not seem to call PAM for session.
 - When using console sessions if the user logs out and disconnects the session stays open (does dcv call pam session at logout?)
 - Should we add a monitor script (cron or service) to close unused console sessions?

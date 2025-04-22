@@ -3,8 +3,7 @@
 # Create a session for the user logging in and enable collaboration
 #
 # Run by pam_exec auth configured in /etc/dcv/dcv.conf pam-service-name and /etc/pam.d/dcv-autosession
-# Runs as user dvc
-# Requires sudo privileges for the dcv command 
+# Runs as root user
 
 # Configuration
 DEBUG=false  # Options: false|true
@@ -19,6 +18,8 @@ TMP_PERM_FILE="/tmp/dcv_collab.perm"
 
 [ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
+read PASSWORD
+
 # Logging functions
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $*"
@@ -26,15 +27,15 @@ log() {
 
 # Helper functions
 get_current_session_user() {
-    sudo "$DCV_CMD" list-sessions -j | jq -r '.[0].owner // "null"'
+    "$DCV_CMD" list-sessions -j | jq -r '.[0].owner // "null"'
 }
 
 get_current_session_type() {
-    sudo "$DCV_CMD" list-sessions -j | jq -r '.[0].type // "null"'
+    "$DCV_CMD" list-sessions -j | jq -r '.[0].type // "null"'
 }
 
 get_session_id() {
-    sudo "$DCV_CMD" list-sessions -j | jq -r '.[0].id // "null"'
+    "$DCV_CMD" list-sessions -j | jq -r '.[0].id // "null"'
 }
 
 is_user_logged_in() {
@@ -49,7 +50,7 @@ handle_existing_session() {
 
     if [ "$curr_user" == "$pam_user" ]; then
         log "Reusing existing session for $pam_user"
-        sudo "$DCV_CMD" list-sessions
+        "$DCV_CMD" list-sessions
         exit 0
     fi
 }
@@ -62,7 +63,7 @@ cleanup_unused_console_session() {
     if ! is_user_logged_in "$curr_user" && \
        [ "$curr_type" == "console" ]; then
         log "Closing unused console session"
-        sudo "$DCV_CMD" close-session "$SESSION_NAME"
+        "$DCV_CMD" close-session "$SESSION_NAME"
         return 0
     fi
     return 1
@@ -75,7 +76,7 @@ setup_collaboration() {
     
     log "Requesting collaboration for user $pam_user with $curr_user"
     local accepted
-    accepted=$(sudo "$DCV_COLLAB_PROMPT" "$curr_user" "$pam_user" 10)
+    accepted=$("$DCV_COLLAB_PROMPT" "$curr_user" "$pam_user" 10)
     session_id=$(get_session_id)
 
     case "$accepted" in
@@ -95,15 +96,21 @@ setup_collaboration() {
             ;;
     esac
 
-    sudo "$DCV_CMD" set-permissions --session "$session_id" --file "$TMP_PERM_FILE"
+    "$DCV_CMD" set-permissions --session "$session_id" --file "$TMP_PERM_FILE"
     exit 0
 }
 
 create_new_session() {
     local pam_user="$1"
+
+    if [ "$SESSION_TYPE" == "virtual" ]; then
+        # unlock user's login gnome-keyring for virtual sessions
+        echo $PASSWORD | sudo -H -u $pam_user /usr/bin/gnome-keyring-daemon --daemonize --login
+    fi
+
     log "Creating new $SESSION_TYPE session for user $pam_user"
-    sudo "$DCV_CMD" create-session --type "$SESSION_TYPE" --owner "$pam_user" "$SESSION_NAME"
-    sudo "$DCV_CMD" list-sessions
+    "$DCV_CMD" create-session --type "$SESSION_TYPE" --owner "$pam_user" "$SESSION_NAME"
+    "$DCV_CMD" list-sessions
 }
 
 # Main execution

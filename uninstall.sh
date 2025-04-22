@@ -53,7 +53,3 @@ sed -i 's/ \ \ \ \ Option "HardDPMS" "false"//' /etc/X11/xorg.conf.d/10-nvidia.c
 sed -i '/HardDPMS/d' /etc/X11/xorg.conf.d/10-nvidia.conf
 rm -f /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 
-### Unlock keyring at login for virtual session users
-rm -f /usr/bin/dcv_unlock_keyring.sh
-rm -f /etc/xdg/autostart/unlock_keyring.desktop
-
