@@ -77,7 +77,7 @@ cp -f $SCRIPT_DIR/src/xorg.conf.d/20-dcv-stylus.conf /etc/X11/xorg.conf.d/20-dcv
 
 echo "### Configuring keyring unlock at login for virtual session users"
 install --mode=755 $SCRIPT_DIR/src/scripts/dcv_unlock_keyring.sh /usr/bin/dcv_unlock_keyring.sh
-install --mode=644 $SCRIPT_DIR/src/unlock_keyring.desktop /etc/xdg/autostart/dcv_unlock_keyring.desktop
+install --mode=644 $SCRIPT_DIR/src/dcv_unlock_keyring.desktop /etc/xdg/autostart/dcv_unlock_keyring.desktop
 
 echo "### Enabling and starting dcvserver service"
 systemctl start dcvserver.service
