@@ -8,5 +8,3 @@ auth        optional    pam_exec.so seteuid expose_authtok /usr/bin/dcv_autosess
 auth        include     password-auth
 
 account     include     password-auth
-
-

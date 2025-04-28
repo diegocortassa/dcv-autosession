@@ -18,7 +18,7 @@ TMP_PERM_FILE="/tmp/dcv_collab.perm"
 
 [ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
-read PASSWORD
+read -r PASSWORD
 
 # Logging functions
 log() {
@@ -105,7 +105,7 @@ create_new_session() {
 
     if [ "$SESSION_TYPE" == "virtual" ]; then
         # unlock user's login gnome-keyring for virtual sessions
-        echo $PASSWORD | sudo -H -u $pam_user /usr/bin/gnome-keyring-daemon --daemonize --login
+        echo "$PASSWORD" | sudo -H -u "$pam_user" /usr/bin/gnome-keyring-daemon --daemonize --login
     fi
 
     log "Creating new $SESSION_TYPE session for user $pam_user"
