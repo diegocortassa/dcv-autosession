@@ -33,6 +33,8 @@ When a user successfully logs in with the native or web client
 /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
+/usr/bin/dcv_unlock_kering.sh
+/etc/xdg/autostart/unlock_keyring.desktop
 /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
 ```
