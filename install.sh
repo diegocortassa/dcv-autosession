@@ -16,11 +16,10 @@ for arg in "$@"; do
     fi
 done
 
-if [ "$BATCH_MODE" = false ]; then
+if [[ "$BATCH_MODE" == false ]]; then
     echo "This script will install DCV Autosession configuration and will overwrite existing DCV configurations."
     read -r -p "Do you want to proceed? [y/N] " answer
     answer=${answer:-n}
-
     if [[ ! "$answer" =~ ^[Yy]$ ]]; then
         echo "Aborted."
         exit 1
