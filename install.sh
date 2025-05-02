@@ -8,7 +8,7 @@
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 echo "This script will install DCV Autosession configuration and will overwrite existing DCV configurations."
-read -p "Do you want to proceed? [y/N] " answer
+read -r -p "Do you want to proceed? [y/N] " answer
 answer=${answer:-n}
 
 if [[ ! "$answer" =~ ^[Yy]$ ]]; then
