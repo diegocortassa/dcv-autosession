@@ -7,13 +7,24 @@
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
-echo "This script will install DCV Autosession configuration and will overwrite existing DCV configurations."
-read -r -p "Do you want to proceed? [y/N] " answer
-answer=${answer:-n}
+# Check for --batch argument
+BATCH_MODE=false
+for arg in "$@"; do
+    if [[ "$arg" == "--batch" ]]; then
+        BATCH_MODE=true
+        break
+    fi
+done
 
-if [[ ! "$answer" =~ ^[Yy]$ ]]; then
-    echo "Aborted."
-    exit 1
+if [ "$BATCH_MODE" = false ]; then
+    echo "This script will install DCV Autosession configuration and will overwrite existing DCV configurations."
+    read -r -p "Do you want to proceed? [y/N] " answer
+    answer=${answer:-n}
+
+    if [[ ! "$answer" =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 1
+    fi
 fi
 
 # Check prerequisites
