@@ -30,7 +30,7 @@ if [[ -e /etc/redhat-release ]]; then
     fi
 fi
 
-if ! rpm -q gnome-shell 2>&1 >/dev/null; then
+if ! rpm -q gnome-shell >/dev/null 2>&1; then
     echo "This script requires the gnome desktop to be installed"
     exit 1
 fi
