@@ -1,5 +1,9 @@
+[aliases]
+TPNStrictDeny = extensions-client, extensions-server, file-download, file-upload, printer, screenshot, smartcard, usb, webauthn-redirection
+TPNRelaxedDeny = extensions-client, extensions-server, file-download, file-upload, printer, smartcard, usb, webauthn-redirection
+TPNCompliantAllow = audio-in, audio-out, clipboard-paste, display, gamepad, keyboard, keyboard-sas, mouse, pointer, stylus, touch, webcam
+
 [permissions]
 ; TPN compliant, clipboard is limited in size in /etc/dcv/dcv.conf
-%any%       deny    extensions-client extensions-server file-download file-upload printer screenshot smartcard usb webauthn-redirection
-%owner%     allow   builtin
-;%owner%    allow   audio-in audio-out clipboard-copy clipboard-paste display gamepad keyboard keyboard-sas pointer stylus touch webcam
+%any%       deny    TPNRelaxedDeny
+%owner%     allow   TPNCompliantAllow
