@@ -14,7 +14,7 @@ SESSION_NAME="autosession"
 DCV_CMD="/usr/bin/dcv"
 DCV_COLLAB_PROMPT="/usr/bin/dcv_collab_prompt.sh"
 DCV_PERM_FILE="/etc/dcv/default.perm"
-TMP_PERM_FILE="/tmp/dcv_collab.perm"
+COLLAB_PERM_FILE="/tmp/dcv_collab.perm"
 
 [ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
@@ -82,13 +82,13 @@ setup_collaboration() {
     case "$accepted" in
         "Full control")
             log "Collaboration request accepted with full control"
-            cp -f "$DCV_PERM_FILE" "$TMP_PERM_FILE"
-            echo "$pam_user allow builtin" >> "$TMP_PERM_FILE"
+            sed -n '/\[permissions\]/,$p' "$DCV_PERM_FILE" > "$COLLAB_PERM_FILE"
+            echo "$pam_user allow builtin" >> "$COLLAB_PERM_FILE"
             ;;
         "View only")
             log "Collaboration request accepted with view-only access"
-            cp -f "$DCV_PERM_FILE" "$TMP_PERM_FILE"
-            echo "$pam_user allow display pointer" >> "$TMP_PERM_FILE"
+            sed -n '/\[permissions\]/,$p' "$DCV_PERM_FILE" > "$COLLAB_PERM_FILE"
+            echo "$pam_user allow display pointer" >> "$COLLAB_PERM_FILE"
             ;;
         *)
             log "Collaboration request rejected"
@@ -96,7 +96,7 @@ setup_collaboration() {
             ;;
     esac
 
-    "$DCV_CMD" set-permissions --session "$session_id" --file "$TMP_PERM_FILE"
+    "$DCV_CMD" set-permissions --session "$session_id" --file "$COLLAB_PERM_FILE"
     exit 0
 }
 
