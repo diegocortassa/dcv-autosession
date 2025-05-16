@@ -56,3 +56,6 @@ rm -f /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 ### Unlock keyring at login for virtual session users
 rm -f /usr/bin/dcv_unlock_keyring.sh
 rm -f /etc/xdg/autostart/dcv_unlock_keyring.desktop
+
+### utility scripts
+rm -f /usr/bin/dcv_reset_display.sh

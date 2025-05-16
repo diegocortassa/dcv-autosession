@@ -1,5 +1,5 @@
 #!/bin/bash 
-# dcv_pam_exec_autosession
+# dcv_autosession.sh
 # Create a session for the user logging in and enable collaboration
 #
 # Run by pam_exec auth configured in /etc/dcv/dcv.conf pam-service-name and /etc/pam.d/dcv-autosession

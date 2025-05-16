@@ -89,6 +89,9 @@ echo "### Configuring keyring unlock at login for virtual session users"
 install --mode=755 "$SCRIPT_DIR/src/scripts/dcv_unlock_keyring.sh" /usr/bin/dcv_unlock_keyring.sh
 install --mode=644 "$SCRIPT_DIR/src/dcv_unlock_keyring.desktop" /etc/xdg/autostart/dcv_unlock_keyring.desktop
 
+echo "### Installing utility scripts"
+install --mode=755 "$SCRIPT_DIR/src/scripts/dcv_reset_display.sh" /usr/bin/dcv_reset_display.sh
+
 echo "### Enabling and starting dcvserver service"
 systemctl start dcvserver.service
 systemctl enable dcvserver.service
