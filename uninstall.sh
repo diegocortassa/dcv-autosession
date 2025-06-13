@@ -20,7 +20,14 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-## Enable and start dcvserver
+## Disable and stop autosession watch service"
+systemctl disable dcv_autosession_watch.service
+systemctl stop dcv_autosession_watch.service
+rm -f /usr/sbin/dcv_autosession_watch.sh
+rm -f /lib/systemd/system/dcv_autosession_watch.service
+systemctl daemon-reload
+
+## Disable and stop dcvserver
 systemctl stop dcvserver.service
 systemctl disable dcvserver.service
 

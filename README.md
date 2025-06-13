@@ -31,6 +31,8 @@ When a user successfully logs in with the native or web client
 /etc/dcv/dcv_autosessions.env
 /etc/pam.d/dcv-autosession
 /etc/X11/xorg.conf.d/20-dcv-stylus.conf
+/lib/systemd/system/dcv_autosession_watch.service
+/usr/sbin/dcv_autosession_watch.sh
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
 /usr/bin/dcv_unlock_kering.sh
@@ -44,7 +46,5 @@ The dcv_collab_prompt.sh script was taken from https://github.com/NISP-GmbH/DCV-
 
 # TODO
 - A virtual session login does not update wtmp/utmp (last, who, and w commands do not work) dcvpamhelper does not seem to call PAM for session.
-- When using console sessions if the user logs out and disconnects the session stays open (does dcv call pam session at logout?)
-- Should we add a monitor script (cron or service) to close unused console sessions?
 - google-chrome-stable-135.0.7049.84-1.x86_64 seg faults in virtual session even with "--disable-gpu" 
 - google-chrome-stable-122.0.6261.128-1.x86_64 and google-chrome-stable-131.0.6778.139-1.x86_64 work ok
