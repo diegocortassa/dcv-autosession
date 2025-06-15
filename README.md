@@ -35,7 +35,7 @@ When a user successfully logs in with the native or web client
 /usr/bin/dcv_autosession_watch.sh
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
-/usr/bin/dcv_unlock_kering.sh
+/usr/bin/dcv_unlock_keyring.sh
 /etc/xdg/autostart/unlock_keyring.desktop
 /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
@@ -44,7 +44,7 @@ When a user successfully logs in with the native or web client
 # build rpm
 ``` bash
 podman run -it --rm -v "$PWD":/workspace rockylinux:9 bash
-yum install -y rpm-build rpmdevtools make systemd
+dnf install -y rpm-build rpmdevtools make systemd
 cd /workspace
 make rpm
 ```
