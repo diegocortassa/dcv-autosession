@@ -29,8 +29,7 @@ jobs:
         run: |
           tar -czf dcv-autosession-${{ env.VERSION }}.tar.gz \
             --transform "s,^,dcv-autosession-${{ env.VERSION }}/," \
-            install.sh  installwatch.sh  LICENSE.md  Makefile  README.md \
-            rpmbuild  src  uninstall.sh  VERSION \
+            install.sh LICENSE.md  Makefile  README.md uninstall.sh  VERSION \
             src/
 
       - name: Build RPM package
