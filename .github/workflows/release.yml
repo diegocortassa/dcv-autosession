@@ -19,7 +19,7 @@ jobs:
 
       - name: Install RPM build dependencies
         run: |
-          sudo dnf install -y rpm-build rpmdevtools make systemd
+          dnf install -y rpm-build rpmdevtools make systemd
 
       - name: Get version from tag
         id: get_version
