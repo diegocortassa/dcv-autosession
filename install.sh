@@ -93,7 +93,7 @@ echo "### Installing utility scripts"
 install --mode=755 "$SCRIPT_DIR/src/scripts/dcv_reset_display.sh" /usr/bin/dcv_reset_display.sh
 
 echo "### Configuring autosession watch service"
-install --mode=755 "$SCRIPT_DIR/src/scripts/dcv_autosession_watch.sh" /usr/sbin/dcv_autosession_watch.sh
+install --mode=755 "$SCRIPT_DIR/src/scripts/dcv_autosession_watch.sh" /usr/bin/dcv_autosession_watch.sh
 install --mode=644 "$SCRIPT_DIR/src/systemd/dcv_autosession_watch.service" /lib/systemd/system/dcv_autosession_watch.service
 systemctl daemon-reload
 systemctl enable dcv_autosession_watch.service

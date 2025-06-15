@@ -32,7 +32,7 @@ When a user successfully logs in with the native or web client
 /etc/pam.d/dcv-autosession
 /etc/X11/xorg.conf.d/20-dcv-stylus.conf
 /lib/systemd/system/dcv_autosession_watch.service
-/usr/sbin/dcv_autosession_watch.sh
+/usr/bin/dcv_autosession_watch.sh
 /usr/bin/dcv_autosession.sh
 /usr/bin/dcv_collab_prompt.sh
 /usr/bin/dcv_unlock_kering.sh

@@ -2,7 +2,7 @@
 Description=dcv_autosession_watch check fo unused autosession and close it
 
 [Service]
-ExecStart=/usr/sbin/dcv_autosession_watch.sh
+ExecStart=/usr/bin/dcv_autosession_watch.sh
 Restart=always
 RestartSec=30s
 
