@@ -42,7 +42,7 @@ jobs:
         with:
           files: |
             dcv-autosession-${{ env.VERSION }}.tar.gz
-            ~/rpmbuild/RPMS/noarch/dcv-autosession-${{ env.VERSION }}-*.rpm
+            /__w/dcv-autosession/dcv-autosession/rpmbuild/RPMS/noarch/dcv-autosession-${{ env.VERSION }}-*.rpm
           draft: false
           prerelease: false
           generate_release_notes: true
