@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux/rockylinux:9
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install RPM build dependencies
+        run: |
+          sudo dnf install -y rpm-build rpmdevtools make systemd
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Create source tarball
+        run: |
+          tar -czf dcv-autosession-${{ env.VERSION }}.tar.gz \
+            --transform "s,^,dcv-autosession-${{ env.VERSION }}/," \
+            install.sh  installwatch.sh  LICENSE.md  Makefile  README.md \
+            rpmbuild  src  uninstall.sh  VERSION \
+            src/
+
+      - name: Build RPM package
+        run: |
+          make rpm
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dcv-autosession-${{ env.VERSION }}.tar.gz
+            ~/rpmbuild/RPMS/noarch/dcv-autosession-${{ env.VERSION }}-*.rpm
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
