@@ -41,13 +41,36 @@ When a user successfully logs in with the native or web client
 /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
 ```
 
-# build rpm
+# Local build rpm
 ``` bash
 podman run -it --rm -v "$PWD":/workspace rockylinux:9 bash
 dnf install -y rpm-build rpmdevtools make systemd
 cd /workspace
 make rpm
 ```
+
+## Releases
+
+The project uses GitHub Actions to automatically build and publish releases. When a new version is ready:
+
+1. Update the VERSION file with the new version number
+2. Commit all changes
+3. Create and push a new tag:
+```bash
+git tag v1.0  # Replace with actual version
+git push origin v1.0
+```
+
+The GitHub Actions workflow will automatically:
+- Create a source tarball (.tar.gz)
+- Build RPM packages
+- Create a GitHub release with all assets attached
+- Generate release notes from commits
+
+The following assets will be available in each release:
+- Source code (tar.gz)
+- RPM package for RHEL/CentOS/Fedora
+
 
 # Credits
 The dcv_collab_prompt.sh script was taken from https://github.com/NISP-GmbH/DCV-Management-Linux and slightly modified
