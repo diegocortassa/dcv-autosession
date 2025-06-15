@@ -57,7 +57,7 @@ The project uses GitHub Actions to automatically build and publish releases. Whe
 2. Commit all changes
 3. Create and push a new tag:
 ```bash
-git tag v1.0  # Replace with actual version
+git tag v$(cat VERSION)
 git push origin v1.0
 ```
 
