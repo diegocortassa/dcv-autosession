@@ -41,6 +41,14 @@ When a user successfully logs in with the native or web client
 /etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
 ```
 
+# build rpm
+``` bash
+podman run -it --rm -v "$PWD":/workspace rockylinux:9 bash
+yum install -y rpm-build rpmdevtools make systemd
+cd /workspace
+make rpm
+```
+
 # Credits
 The dcv_collab_prompt.sh script was taken from https://github.com/NISP-GmbH/DCV-Management-Linux and slightly modified
 

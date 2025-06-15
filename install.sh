@@ -64,10 +64,10 @@ dnf -y install ./nice-dcv-*-el9-x86_64/nice-dcv-server-*.rpm ./nice-dcv-*-el9-x8
 rm -rf nice-dcv-*-el9-x86_64
 
 echo "### Configuring DCV server with autosession"
-cp -a /etc/dcv/dcv.conf /etc/dcv/dcv.conf.bak
+cp -a --backup=numbered /etc/dcv/dcv.conf /etc/dcv/dcv.conf.bk_by_autosession
 install --mode=644 "$SCRIPT_DIR/src/dcv/dcv.conf" /etc/dcv/dcv.conf
 
-cp -a /etc/dcv/default.perm /etc/dcv/default.perm.bak
+cp -a --backup=numbered /etc/dcv/default.perm /etc/dcv/default.perm.bk_by_autosession
 install --mode=644 "$SCRIPT_DIR/src/dcv/default.perm" /etc/dcv/default.perm
 
 install --mode=644 "$SCRIPT_DIR/src/pam.d/dcv-autosession" /etc/pam.d/dcv-autosession
