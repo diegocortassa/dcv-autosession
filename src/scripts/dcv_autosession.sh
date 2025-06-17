@@ -5,7 +5,7 @@
 # Run by pam_exec auth configured in /etc/dcv/dcv.conf pam-service-name and /etc/pam.d/dcv-autosession
 # Runs as root user
 
-# Configuration
+# Configuration defaults
 DEBUG=false  # Options: false|true
 SESSION_TYPE="virtual" # Options: virtual|console
 LOG_FILE="/var/log/dcv/dcv_autosession.log"
@@ -16,6 +16,7 @@ DCV_COLLAB_PROMPT="/usr/bin/dcv_collab_prompt.sh"
 DCV_PERM_FILE="/etc/dcv/default.perm"
 COLLAB_PERM_FILE="/tmp/dcv_collab.perm"
 
+# Load configuration, overrides defaults
 [ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
 read -r PASSWORD
@@ -131,7 +132,6 @@ main() {
 
     # Check for unused console session
     # If there is a console session but no user logged in we close it
-    # TODO find a way do close console sessions when the user logouts
     local curr_session_type
     curr_session_type=$(get_current_session_type)
     cleanup_unused_console_session "$curr_user" "$curr_session_type" "$PAM_USER" && curr_user="null"

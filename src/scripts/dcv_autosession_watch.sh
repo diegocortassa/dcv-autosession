@@ -1,10 +1,14 @@
-#!/bin/bash
+#!/usr/bin/bash
 # dcv_autosession_watch.sh
 # check if there is an unused DCV autosession and close it
 
-CHECK_INTERVAL=60  # Check every 60 seconds
+# Configuration defaults
+WATCH_INTERVAL=60  # Check every 60 seconds
 DCV_CMD="/usr/bin/dcv"
 DEBUG=false
+
+# Load configuration, overrides defaults
+[ -f "/etc/dcv/dcv_autosession.env" ] && source "/etc/dcv/dcv_autosession.env" 
 
 # Logging functions
 log() {
@@ -48,8 +52,8 @@ main() {
 
     # User has a gnome session open
     if is_gnome_session_active "$curr_user"; then
-        $DEBUG && log "Gnome session is active for user: $curr_user"
-        return
+        $DEBUG && log "Gnome session is active for user: $curr_user, resetting displays"
+        su $curr_user bash -c /usr/bin/dcv_reset_display.sh
     fi
 
     # close the unused autosession
