@@ -40,10 +40,14 @@ firewall-cmd --zone public --permanent --add-port 8443/udp || :
 firewall-cmd --reload || :
 # Disable Wayland
 sed -i "s/#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf || :
-echo "Making backup of /etc/dcv/dcv.conf"
+echo "Making backup of /etc/dcv/dcv.conf to /etc/dcv/dcv.conf.bk_by_autosession"
 cp -a --backup=numbered /etc/dcv/dcv.conf /etc/dcv/dcv.conf.bk_by_autosession
-echo "Making backup of /etc/dcv/default.perm"
+echo "Overwriting /etc/dcv/dcv.conf"
+cp -f /usr/share/doc/dcv-autosession/dcv.conf /etc/dcv/
+echo "Making backup of /etc/dcv/default.perm to /etc/dcv/default.perm.bk_by_autosession"
 cp -a --backup=numbered /etc/dcv/default.perm /etc/dcv/default.perm.bk_by_autosession
+echo "Overwriting /etc/dcv/default.perm"
+cp -f /usr/share/doc/dcv-autosession/default.perm /etc/dcv/
 
 %preun
 %systemd_preun dcv_autosession_watch.service
