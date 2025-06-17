@@ -12,7 +12,7 @@ for MONITOR in $(xrandr | grep " connected" | awk '{ print $1}'); do
     echo "Resetting $MONITOR transform fro display $DISPLAY"
     xrandr --output $MONITOR --transform none
 done
-
-sleep 5
+# Wait for screens to settle
+sleep 2
 echo "Reloading gnome-shell to reset monitor conf"
 killall -HUP gnome-shell
