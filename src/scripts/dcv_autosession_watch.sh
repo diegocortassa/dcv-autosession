@@ -66,5 +66,5 @@ main() {
 log "Autosession watch started. Monitoring for unused autosessions..."
 while true; do
     main "$@"
-    sleep $CHECK_INTERVAL  # Check every 60 seconds
+    sleep $WATCH_INTERVAL  # Check every 60 seconds
 done
