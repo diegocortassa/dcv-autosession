@@ -2,10 +2,10 @@ PREFIX ?= /
 DESTDIR ?= 
 VERSION := $(shell cat VERSION)
 
-.PHONY: all install clean rpm
+.PHONY: all install clean tag rpm
 
 all:
-	@echo "Available targets: install clean rpm"
+	@echo "Available targets: install clean tag rpm"
 
 install:
 	# DCV server configuration
@@ -45,6 +45,10 @@ install:
 
 clean:
 	rm -rf rpmbuild
+
+tag:
+	git tag -a v$(VERSION) -m "Version $(VERSION)"
+	# git push origin v$(VERSION)
 
 rpm:
 	mkdir -p rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
