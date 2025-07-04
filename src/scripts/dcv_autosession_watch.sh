@@ -53,13 +53,15 @@ main() {
     # User has a gnome session open
     if is_gnome_session_active "$curr_user"; then
         $DEBUG && log "Gnome session is active for user: $curr_user, resetting displays"
-        su $curr_user bash -c /usr/bin/dcv_reset_display.sh
+        # reset the display config
+        sudo -u "$curr_user" bash -c /usr/bin/dcv_reset_display.sh
     fi
 
     # close the unused autosession
     log "Closing unused autosession for user: $curr_user..."
     "$DCV_CMD" close-session autosession
-
+    # No user is logged reset the display config as user gdm
+    sudo -u gdm DISPLAY=:0 /usr/bin/dcv_reset_display.sh
 }
 
 # Start the main loop

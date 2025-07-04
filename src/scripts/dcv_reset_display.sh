@@ -9,7 +9,7 @@ if [ -z "$DISPLAY" ]; then
 fi
 
 for MONITOR in $(xrandr | grep " connected" | awk '{ print $1}'); do
-    echo "Resetting $MONITOR transform fro display $DISPLAY"
+    echo "Resetting $MONITOR transform for display $DISPLAY"
     xrandr --output $MONITOR --transform none
 done
 # Wait for screens to settle
