@@ -24,6 +24,8 @@ Configuration and scripts for Amazon DCV Server autosession setup.
 It creates an "autosession" standalone configuration, with no need for session
 management as it takes care of creating user sessions and managing collaboration
 requests using a pam_exec script. Only one session per machine is supported.
+To enable atuosession add pam-service-name="dcv-autosession" to the [security]
+section in /etc/dcv/dcv.conf
 
 %prep
 %setup -q

@@ -15,7 +15,7 @@ The preferred way is to use the rpm.
 It can be manually installed via makefile with:
 `make install`
 
-To enable atuosessin add `pam-service-name="dcv-autosession"` to the `[security]` section in /etc/dcv/dcv.conf
+To enable atuosession add `pam-service-name="dcv-autosession"` to the `[security]` section in /etc/dcv/dcv.conf
 
 # Uninstall
 If it was installed via rpm just remove the rpm launch.
