@@ -8,10 +8,8 @@ all:
 	@echo "Available targets: install clean tag rpm"
 
 install:
-	# DCV server configuration
+	# Autosession configuration
 	install -d $(DESTDIR)/etc/dcv
-	# install -m 644 src/dcv/dcv.conf $(DESTDIR)/etc/dcv/dcv.conf
-	# install -m 644 src/dcv/default.perm $(DESTDIR)/etc/dcv/default.perm
 	install -m 644 src/dcv/dcv_autosession.env $(DESTDIR)/etc/dcv/dcv_autosession.env
 
 	# PAM configuration
@@ -35,13 +33,55 @@ install:
 	install -d $(DESTDIR)/etc/X11/xorg.conf.d
 	install -m 644 src/xorg.conf.d/20-dcv-stylus.conf $(DESTDIR)/etc/X11/xorg.conf.d/20-dcv-stylus.conf
 
-	# Autostart configuration
+	# Autostart unlock keyring
 	install -d $(DESTDIR)/etc/xdg/autostart
 	install -m 644 src/dcv_unlock_keyring.desktop $(DESTDIR)/etc/xdg/autostart/dcv_unlock_keyring.desktop
 
 	# Systemd service
 	install -d $(DESTDIR)/usr/lib/systemd/system
 	install -m 644 src/systemd/dcv_autosession_watch.service $(DESTDIR)/usr/lib/systemd/system/dcv_autosession_watch.service
+
+	# Done
+	# ******************************************************
+	# ******* To enable atuosession add `pam-service-name="dcv-autosession"`
+	# ******* to the `[security]` section in /etc/dcv/dcv.conf
+	# ******************************************************
+
+uninstall:
+	# Stop and remove Systemd service
+	systemctl disable dcv_autosession_watch.service
+	systemctl stop dcv_autosession_watch.service
+	rm -f $(DESTDIR)/usr/lib/systemd/system/dcv_autosession_watch.service
+	systemctl daemon-reload
+
+	# Remove autostart unlock keyring
+	rm -f $(DESTDIR)/etc/xdg/autostart/dcv_unlock_keyring.desktop
+
+	# Remove Xorg configuration
+	rm -f  $(DESTDIR)/etc/X11/xorg.conf.d/20-dcv-stylus.conf
+
+	# Remove Polkit configuration
+	rm -f $(DESTDIR)/etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+	rm -f $(DESTDIR)/etc/polkit-1/localauthority/50-local.d/50-allow-reboot.pkla
+
+	# Remove scripts
+	rm -f $(DESTDIR)/usr/bin/dcv_autosession.sh
+	rm -f $(DESTDIR)/usr/bin/dcv_collab_prompt.sh
+	rm -f $(DESTDIR)/usr/bin/dcv_unlock_keyring.sh
+	rm -f $(DESTDIR)/usr/bin/dcv_reset_display.sh
+	rm -f $(DESTDIR)/usr/bin/dcv_autosession_watch.sh
+
+	# Remove PAM configuration
+	rm -f $(DESTDIR)/etc/pam.d/dcv-autosession
+
+	# Remove autosession configuration
+	rm -f $(DESTDIR)/etc/dcv/dcv_autosession.env
+
+	# Done
+	# ******************************************************
+	# ******* Remove `pam-service-name="dcv-autosession"`
+	# ******* from the `[security]` section in /etc/dcv/dcv.conf
+	# ******************************************************
 
 clean:
 	rm -rf rpmbuild
