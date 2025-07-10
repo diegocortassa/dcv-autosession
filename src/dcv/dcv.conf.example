@@ -51,3 +51,4 @@ reporters=['jsonlogfile']
 [security]
 # Enable custom pam config for autosession
 pam-service-name="dcv-autosession"
+

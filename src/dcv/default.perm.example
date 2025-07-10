@@ -7,3 +7,4 @@ TPNCompliantAllow = audio-in, audio-out, clipboard-paste, display, gamepad, keyb
 ; TPN compliant, clipboard is limited in size in /etc/dcv/dcv.conf
 %any%       deny    TPNRelaxedDeny
 %owner%     allow   TPNCompliantAllow
+

@@ -17,7 +17,6 @@ Requires:       jq
 Requires:       zenity
 Requires:       pinentry
 Requires:       pinentry-gnome3
-Requires:       firewalld
 Requires:       systemd
 
 %description
@@ -34,20 +33,6 @@ make install DESTDIR=%{buildroot}
 
 %post
 %systemd_post dcv_autosession_watch.service
-echo "Opening DCV websocket and QUIC ports (8443 tcp and udp)"
-firewall-cmd --zone public --permanent --add-port 8443/tcp || :
-firewall-cmd --zone public --permanent --add-port 8443/udp || :
-firewall-cmd --reload || :
-# Disable Wayland
-sed -i "s/#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf || :
-echo "Making backup of /etc/dcv/dcv.conf to /etc/dcv/dcv.conf.bk_by_autosession"
-cp -a --backup=numbered /etc/dcv/dcv.conf /etc/dcv/dcv.conf.bk_by_autosession
-echo "Overwriting /etc/dcv/dcv.conf"
-cp -f /usr/share/doc/dcv-autosession/dcv.conf /etc/dcv/
-echo "Making backup of /etc/dcv/default.perm to /etc/dcv/default.perm.bk_by_autosession"
-cp -a --backup=numbered /etc/dcv/default.perm /etc/dcv/default.perm.bk_by_autosession
-echo "Overwriting /etc/dcv/default.perm"
-cp -f /usr/share/doc/dcv-autosession/default.perm /etc/dcv/
 
 %preun
 %systemd_preun dcv_autosession_watch.service
@@ -58,8 +43,8 @@ cp -f /usr/share/doc/dcv-autosession/default.perm /etc/dcv/
 %files
 %license LICENSE.md
 %doc README.md
-%doc src/dcv/dcv.conf
-%doc src/dcv/default.perm
+%doc src/dcv/dcv.conf.example
+%doc src/dcv/default.perm.example
 %config(noreplace) %{_sysconfdir}/dcv/dcv_autosession.env
 %config(noreplace) %{_sysconfdir}/pam.d/dcv-autosession
 %{_bindir}/dcv_autosession.sh
@@ -76,3 +61,5 @@ cp -f /usr/share/doc/dcv-autosession/default.perm /etc/dcv/
 %changelog
 * Sun Jun 15 2025 Diego Cortassa <diego@cortassa.net> - 0.5-1
 - Initial package release
+* Sun Jul 10 2025 Diego Cortassa <diego@cortassa.net> - 1.2-1
+- Fixed config files in rpm
